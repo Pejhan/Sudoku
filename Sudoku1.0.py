@@ -158,6 +158,3 @@ for i in range(1, d * 2):
         break
 
 disp_sudoku(sudoku)
-
-# print(rc)
-# print(len(rc))
