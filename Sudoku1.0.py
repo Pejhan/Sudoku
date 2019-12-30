@@ -1,12 +1,12 @@
 import numpy as np
 import pandas as pd
 
-d = 16
+d = 9
 sd = int(d ** (1 / 2))
 
 all_possible_choices = [i + 1 for i in range(d)]
 rc = {}
-raw_soduko_df = pd.read_excel(io='soduko.xlsx',
+raw_sudoku_df = pd.read_excel(io='sudoku.xlsx',
                               sheet_name=str(d) + "x" + str(d)
                               )
 
@@ -35,12 +35,12 @@ class Soduko:
         self.y = s.y[:]
         self.z = s.z[:]
 
-soduko = Soduko()
-soduko.imprt(raw_soduko_df)
+sudoku = Soduko()
+sudoku.imprt(raw_sudoku_df)
 
 
-def disp_soduko(s):
-    ###Used to display "soduko" in the process if anywhere needed
+def disp_sudoku(s):
+    ###Used to display "sudoku" in the process if anywhere needed
     for br in range(sd):
         for r in range(sd):
             for bc in range(sd):
@@ -85,7 +85,7 @@ def solve(s):
                         handle(s, br, bc, r, c)
 
 def assignValue(s, br, bc, r, c, v):
-    ###Assigns the proposed value in soduko and all of its derivitives and takes care of the remaining_choices variable
+    ###Assigns the proposed value in sudoku and all of its derivitives and takes care of the remaining_choices variable
     s.s[br * sd + bc][r][c] = v
     s.x[br * sd + r][bc * sd + c] = v
     s.y[bc * sd + c][br * sd + r] = v
@@ -151,13 +151,13 @@ def handle(s, br, bc, r, c):
 
 
 for i in range(1, d * 2):
-    flat_soduko = np.hstack(np.hstack(soduko.s))
-    if 0 in flat_soduko:
-        solve(soduko)
+    flat_sudoku = np.hstack(np.hstack(sudoku.s))
+    if 0 in flat_sudoku:
+        solve(sudoku)
     else:
         break
 
-disp_soduko(soduko)
+disp_sudoku(sudoku)
 
 # print(rc)
 # print(len(rc))
